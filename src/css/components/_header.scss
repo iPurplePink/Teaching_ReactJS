@@ -1,0 +1,13 @@
+.header-section {
+  .link {
+    margin: 10px;
+    text-decoration: none;
+
+    &:hover {
+      color: palevioletred;
+    }
+    &:focus {
+      color: green;
+    }
+  }
+}

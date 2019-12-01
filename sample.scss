@@ -1,0 +1,18 @@
+.home-section { // parent
+
+  .home-title { // child 
+    &:hover { //psuedo class
+
+    }
+  }
+}
+
+
+
+<section className="home-section">
+  <p className="home-title"> hello </p>
+</section>
+
+<section className="about-section">
+<p className="home-title"> hello </p>
+</section>

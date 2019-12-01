@@ -1,0 +1,18 @@
+Standards
+- Foldering Structure
+- Naming Convensions
+
+Libraries
+- react-router-dom
+- node-sass
+
+
+-react-router-dom
+BrowserRouter is the router implementation for HTML5 browsers (vs Native).
+Switch returns only the first matching route rather than all matching routes.
+Route is the conditionally shown component based on matching a path to a URL.
+
+Link is your replacement for anchor tags.
+-redux-observable
+store - Creates a Redux store that holds the complete state tree of your app.
+        There should only be a single store in your app.
