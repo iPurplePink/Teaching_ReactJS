@@ -2,39 +2,54 @@ import React, { Component } from "react";
 
 class Home extends Component {
   state = {
-    data: []
+    data: [],
+    loading: false,
+    isError: false
   };
 
   componentDidMount() {
-    this.getPlanents();
+    this.getPlanets();
   }
 
-  getPlanents = async () => {
-    await fetch("https://swapi.co/api/planets/")
+  getPlanets = () => {
+    this.setState({ ...this.state, loading: true, isError: false });
+    fetch("https://swapi.co/api/planets/")
       .then(result =>
-        result
-          .json()
-          .then(response => this.setState({ data: response.results }))
+        result.json().then(response =>
+          this.setState({
+            ...this.state,
+            data: response.results,
+            loading: false
+          })
+        )
       )
-      .catch(error => console.log("error", error));
+      .catch(error => {
+        console.log(error);
+        this.setState({ ...this.state, loading: false, isError: true });
+      });
   };
 
   render() {
+    console.log(this.state);
+    const { loading, data, isError } = this.state;
+
     return (
       <section>
         Home
-        {/* <h1>{this.state.data.length} Star Wars Planets</h1> */}
-        {/* <div className="films-container">
-          {this.state.data.map(item => (
-            <div key={item.name}>
-              <h3>{item.name}</h3>
-              <p>{`Climate: ${item.climate}`}</p>
-              <p>{`Diameter: ${item.diameter}`}</p>
-              <p>{`Population: ${item.population}`}</p>
-              <p>{`Terrain: ${item.terrain}`}</p> */}
-        {/* </div>
+        <button onClick={this.getPlanets}>Fetch</button>
+        {!loading &&
+          data.map(planet => (
+            <div key={planet.name}>
+              <h1>{planet.name}</h1>
+              <h5>{planet.climate}</h5>
+              <h5>{planet.diameter}</h5>
+              <h5>{planet.population}</h5>
+              <h5>{planet.gravity}</h5>
+              <h5>{planet.terrain}</h5>
+            </div>
           ))}
-        </div> */}
+        {loading && <div>Loading...</div>}
+        {isError && <div>Error loading you data, try again.</div>}
       </section>
     );
   }
